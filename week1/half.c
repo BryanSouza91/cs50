@@ -1,26 +1,24 @@
-#include <stdio.h>
-#include <cs50.h>
+// Calculate your half of a restaurant bill
+// Data types, operations, type casting, return value
 
-float half(float bill, float tax, float tip);
+#include <cs50.h>
+#include <stdio.h>
+
+float half(float bill, float tax, int tip);
 
 int main(void)
 {
-    float subtotal = get_float("Bill before tax and tip:\t");
-    float tax_rate = get_float("Sales Tax Rate:\t");
-    float tip_rate = get_float("Tip Rate:\t");
+    float bill_amount = get_float("Bill before tax and tip: ");
+    float tax_percent = get_float("Sale Tax Percent: ");
+    int tip_percent = get_int("Tip percent: ");
 
-    float total = half(subtotal, tax_rate, tip_rate);
-
-    printf("You each pay $%.2f!\n", total);
+    printf("You will owe $%.2f each!\n", half(bill_amount, tax_percent, tip_percent));
 }
 
-float half(float bill, float tax, float tip)
+// TODO: Complete the function
+float half(float bill, float tax, int tip)
 {
-    tax /= 100;
-    tax *= bill;
-    bill += tax;
-    tip /= 100;
-    tip *= bill;
-    bill += tip;
-    return bill / 2;
+    tax = bill * tax / 100;
+    tip = (bill + tax) * tip / 100;
+    return (bill + tax + tip) / 2;
 }

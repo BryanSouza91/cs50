@@ -1,6 +1,5 @@
 // Become familiar wih C syntax
 // Learn to debug buggy code
-
 #include <stdio.h>
 #include <cs50.h>
 

@@ -3,15 +3,31 @@
 
 #define between(x, a, b)  (((a) <= (x)) && ((x) <= (b)))
 
+int first2;
+
+bool valid(long card_number);
+string identify_provider(int first2);
+
 int main(void) 
 {
-    int first2, c = 1, sum_a = 0, sum_b = 0, total = 0;
-    long n;
-    n = get_long("Number:\t");
+    long cc_num = get_long("CC Number:\t");
+    if (valid(cc_num))
+    {
+        printf("%s\n", identify_provider(first2));
+    }
+    else
+    {
+        printf("INVALID\n");
+    } 
+}
+
+bool valid(long card_number)
+{
+    int c = 1, sum_a = 0, sum_b = 0, total = 0;
     do
     {
         // printf("Counter:\t%i\n", c);
-        int digit = n % 10;
+        int digit = card_number % 10;
         if (c % 2 == 0)
         {
             // printf("Digit:\t%i\n", digit);
@@ -32,50 +48,48 @@ int main(void)
             sum_b += digit;
         }
         c++;
-        if (between(n, 10, 99))
+        if (between(card_number, 10, 99))
         {
-            first2 = n;
-            // printf("%ld\n", n);
+            first2 = card_number;
+            // printf("%ld\n", card_number);
         }
     }
-    while (n /= 10);
+    while (card_number /= 10);
     total = sum_a + sum_b;
+    // printf("Total:\t%i\nLast Digit:\t%i\n", total, total % 10);
     if (total % 10 == 0)
     {
-        switch (first2)
-        {
-            case 34:
-                printf("AMEX\n");
-                break;
-            case 37:
-                printf("AMEX\n");
-                break;
-            case 40:
-                printf("VISA\n");
-                break;
-            case 51:
-                printf("MASTERCARD\n");
-                break;
-            case 52:
-                printf("MASTERCARD\n");
-                break;
-            case 53:
-                printf("MASTERCARD\n");
-                break;
-            case 54:
-                printf("MASTERCARD\n");
-                break;
-            case 55:
-                printf("MASTERCARD\n");
-                break;
-            case 60:
-                printf("DISCOVER\n");
-                break;
-        }
+        return true;
     }
-    else
+    return false;
+}
+
+string identify_provider(int first2)
+{
+    string a = "AMEX";
+    string v = "VISA";
+    string m = "MASTERCARD";
+    string d = "DISCOVER";
+    switch (first2)
     {
-        printf("INVALID\n");
-    }
-    // printf("Total:\t%i\nLast Digit:\t%i\n", total, total % 10);
+        case 34:
+            return a;
+        case 37:
+            return a;
+        case 40:
+            return v;
+        case 51:
+            return m;
+        case 52:
+            return m;
+        case 53:
+            return m;
+        case 54:
+            return m;
+        case 55:
+            return m;
+        case 60:
+            return d;
+    }   
+    return "NO MATCH";   
 }

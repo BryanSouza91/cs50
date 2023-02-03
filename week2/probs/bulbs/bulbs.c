@@ -11,27 +11,32 @@ long dec_to_bin(int letter);
 int main(void)
 {
     // TODO
-    string message = get_string("Message:  ");
-    int length = strlen(message);
+    int length;
+    string message;
+    do
+    {
+        message = get_string("Message:  ");
+        length = strlen(message);
+    }
+    while (length == 0);
 
     for (int i = 0; i < length; i++)
     {
         int dec = (int) message[i];
        	long binary = dec_to_bin(dec);
-	int rBinary[BITS_IN_BYTE];
+        int rBinary[BITS_IN_BYTE];
         for (int j = 1; j <= BITS_IN_BYTE; j++)
         {
             int digit = binary % 10;
-	    rBinary[BITS_IN_BYTE - j] = digit;
-	    binary /= 10;
-	}
-	for (int j = 0; j < BITS_IN_BYTE; j++)
-	{
-	    print_bulb(rBinary[j]);
-	}
+    	    rBinary[BITS_IN_BYTE - j] = digit;
+	        binary /= 10;
+        }
+    	for (int j = 0; j < BITS_IN_BYTE; j++)
+    	{
+    	    print_bulb(rBinary[j]);
+    	}
         printf("\n");
     }
-
 }
 
 void print_bulb(int bit)
@@ -60,7 +65,6 @@ long dec_to_bin(int dec)
         dec /= 2;
         binary += remainder * i;
         i *= 10;
-
     }
     return binary;
 }

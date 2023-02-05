@@ -15,7 +15,9 @@ int main(int argc, string argv[])
     }
 
     int key = 0;
-    for (int i = 0; i < strlen(argv[1]); i++)
+    int keyLength =0;
+    keyLength = strlen(argv[1]);
+    for (int i = 0; i < keyLength; i++)
     {
         // check that program receives only numeric keys
         if (!isdigit(argv[1][i]))

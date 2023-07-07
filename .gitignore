@@ -2,3 +2,4 @@
 /py*
 *.tar.gz
 /cpp
+*.c.swp
